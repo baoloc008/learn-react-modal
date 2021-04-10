@@ -1,0 +1,39 @@
+.modalContent {
+  position: absolute;
+  background-color: lightgreen;
+  max-height: 75%;
+  left: 0;
+  right: 0;
+  bottom: -100%;
+  -webkit-overflow-scrolling: touch;
+  outline: none;
+  overflow: auto;
+}
+
+.modalContentAfterOpen {
+  bottom: 0;
+  transition: bottom 0.4s ease-out;
+}
+
+.modalContentBeforeClose {
+  bottom: -100%;
+  transition: bottom 0.3s linear;
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.modalOverlayAfterOpen {
+  background-color: rgba(0, 0, 0, 0.6);
+  transition: background-color 0.4s ease-out;
+}
+
+.modalOverlayBeforeClose {
+  background-color: rgba(0, 0, 0, 0);
+  transition: background-color 0.3s linear;
+}
