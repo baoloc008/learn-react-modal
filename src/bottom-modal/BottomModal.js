@@ -11,7 +11,6 @@ function BottomModal(props) {
       modalOverlayClassName={styles.modalOverlay}
       modalOverlayAfterOpenClassName={styles.modalOverlayAfterOpen}
       modalOverlayBeforeCloseClassName={styles.modalOverlayBeforeClose}
-      closeTimeoutMS={300}
       {...props}
     />
   );

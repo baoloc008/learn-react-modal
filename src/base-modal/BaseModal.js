@@ -1,13 +1,12 @@
-import React, { useEffect, useRef } from "react";
-import ReactModal from "react-modal";
+import React, { useEffect, useRef, useState } from "react";
 import {
   disableBodyScroll,
   enableBodyScroll,
   clearAllBodyScrollLocks,
 } from "body-scroll-lock";
 import styles from "./styles.module.css";
-
-ReactModal.setAppElement("#root");
+import PortalModal from "./PortalModal";
+import classNames from "classnames";
 
 function Modal({
   isOpen = false,
@@ -21,38 +20,46 @@ function Modal({
   modalOverlayBeforeCloseClassName = "",
   ...otherProps
 }) {
+  const [isRender, setRender] = useState(isOpen);
   const modalRef = useRef(null);
 
   useEffect(() => {
     if (isOpen) {
-      disableBodyScroll(modalRef.current);
+      disableBodyScroll(modalRef);
+      setRender(true);
     } else {
-      enableBodyScroll(modalRef.current);
+      enableBodyScroll(modalRef);
     }
     return () => {
       clearAllBodyScrollLocks();
     };
   }, [isOpen]);
 
+  function handleAnimationEnd() {
+    if (!isOpen) {
+      setRender(false);
+    }
+  }
+
+  const modalStyle = classNames(modalContentClassName, {
+    [modalContentAfterOpenClassName]: isOpen,
+    [modalContentBeforeCloseClassName]: !isOpen,
+  });
+
+  const backdropStyle = classNames(modalOverlayClassName, {
+    [modalOverlayAfterOpenClassName]: isOpen,
+    [modalOverlayBeforeCloseClassName]: !isOpen,
+  });
+
   return (
-    <ReactModal
-      isOpen={isOpen}
-      onRequestClose={closeModal}
-      ref={modalRef}
-      className={{
-        base: modalContentClassName,
-        afterOpen: modalContentAfterOpenClassName,
-        beforeClose: modalContentBeforeCloseClassName,
-      }}
-      overlayClassName={{
-        base: modalOverlayClassName,
-        afterOpen: modalOverlayAfterOpenClassName,
-        beforeClose: modalOverlayBeforeCloseClassName,
-      }}
-      {...otherProps}
-    >
-      {children}
-    </ReactModal>
+    <PortalModal isShowing={isRender}>
+      <div className={styles.modalWrapper} ref={modalRef} {...otherProps}>
+        <div onClick={closeModal} className={backdropStyle} />
+        <div onAnimationEnd={handleAnimationEnd} className={modalStyle}>
+          {children}
+        </div>
+      </div>
+    </PortalModal>
   );
 }
 

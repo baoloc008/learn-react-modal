@@ -11,13 +11,29 @@
 }
 
 .modalContentAfterOpen {
-  bottom: 0;
-  transition: bottom 0.4s ease-out;
+  animation: slideFromBottom 0.4s ease-out forwards;
 }
 
 .modalContentBeforeClose {
-  bottom: -100%;
-  transition: bottom 0.3s linear;
+  animation: slideToBottom 0.3s linear forwards;
+}
+
+@keyframes slideFromBottom {
+  from {
+    bottom: -100%;
+  }
+  to {
+    bottom: 0;
+  }
+}
+
+@keyframes slideToBottom {
+  from {
+    bottom: 0;
+  }
+  to {
+    bottom: -100%;
+  }
 }
 
 .modalOverlay {
@@ -29,11 +45,27 @@
 }
 
 .modalOverlayAfterOpen {
-  background-color: rgba(0, 0, 0, 0.6);
-  transition: background-color 0.4s ease-out;
+  animation: overlayFadeIn 0.4s ease-out forwards;
+}
+
+@keyframes overlayFadeIn {
+  from {
+    background-color: rgba(0, 0, 0, 0);
+  }
+  to {
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+}
+
+@keyframes overlayFadeOut {
+  from {
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+  to {
+    background-color: rgba(0, 0, 0, 0);
+  }
 }
 
 .modalOverlayBeforeClose {
-  background-color: rgba(0, 0, 0, 0);
-  transition: background-color 0.3s linear;
+  animation: overlayFadeOut 0.3s linear forwards;
 }
