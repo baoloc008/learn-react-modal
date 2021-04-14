@@ -1,5 +1,5 @@
 import React from "react";
-import { useModal } from "./base-modal";
+import { useModal } from "./BaseModal";
 import AppModal from "./AppModal";
 import LongContent from "./LongContent";
 

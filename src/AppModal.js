@@ -1,5 +1,5 @@
 import React from "react";
-import BottomModal from "./bottom-modal";
+import BottomModal from "./BottomModal";
 import LongContent from "./LongContent";
 
 function AppModal({ isOpen, onCloseModal }) {

@@ -1,5 +1,5 @@
 import React from "react";
-import BaseModal from "../base-modal";
+import BaseModal from "../BaseModal";
 import styles from "./styles.module.css";
 
 function BottomModal(props) {
