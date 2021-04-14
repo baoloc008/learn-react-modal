@@ -1,9 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import {
-  disableBodyScroll,
-  enableBodyScroll,
-  clearAllBodyScrollLocks,
-} from "body-scroll-lock";
 import styles from "./styles.module.css";
 import PortalModal from "./PortalModal";
 import classNames from "classnames";
@@ -25,13 +20,13 @@ function Modal({
 
   useEffect(() => {
     if (isOpen) {
-      disableBodyScroll(modalRef);
+      // disableBodyScroll(modalRef);
       setRender(true);
     } else {
-      enableBodyScroll(modalRef);
+      // enableBodyScroll(modalRef);
     }
     return () => {
-      clearAllBodyScrollLocks();
+      // clearAllBodyScrollLocks();
     };
   }, [isOpen]);
 
